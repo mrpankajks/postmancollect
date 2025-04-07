@@ -1,0 +1,173 @@
+{
+    "info": {
+        "name": "Reqres Test Cases \u2013 Pass",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Get Single User",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "https://reqres.in/api/users/2",
+                    "protocol": "https",
+                    "host": [
+                        "reqres",
+                        "in"
+                    ],
+                    "path": [
+                        "api",
+                        "users",
+                        "2"
+                    ]
+                }
+            },
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Response has correct user ID\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData.data.id).to.eql(2);",
+                            "});"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Create User",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Pankaj\",\n    \"job\": \"QA\"\n}"
+                },
+                "url": {
+                    "raw": "https://reqres.in/api/users",
+                    "protocol": "https",
+                    "host": [
+                        "reqres",
+                        "in"
+                    ],
+                    "path": [
+                        "api",
+                        "users"
+                    ]
+                }
+            },
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "pm.test(\"Status code is 201\", function () {",
+                            "    pm.response.to.have.status(201);",
+                            "});",
+                            "",
+                            "pm.test(\"Response contains name and job\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property(\"name\", \"Pankaj\");",
+                            "    pm.expect(jsonData).to.have.property(\"job\", \"QA\");",
+                            "});"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Update User",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Pankaj\",\n    \"job\": \"Senior QA\"\n}"
+                },
+                "url": {
+                    "raw": "https://reqres.in/api/users/2",
+                    "protocol": "https",
+                    "host": [
+                        "reqres",
+                        "in"
+                    ],
+                    "path": [
+                        "api",
+                        "users",
+                        "2"
+                    ]
+                }
+            },
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Job updated\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData.job).to.eql(\"Senior QA\");",
+                            "});"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Delete User",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "https://reqres.in/api/users/2",
+                    "protocol": "https",
+                    "host": [
+                        "reqres",
+                        "in"
+                    ],
+                    "path": [
+                        "api",
+                        "users",
+                        "2"
+                    ]
+                }
+            },
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "pm.test(\"Status code is 204\", function () {",
+                            "    pm.response.to.have.status(204);",
+                            "});"
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
